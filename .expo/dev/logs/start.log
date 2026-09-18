@@ -1,0 +1,116 @@
+{"_e":"root:init","_t":1789750980560,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789750980561,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789750980564,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1789750980912,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789750981463,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789750982508,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789750986605,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"env:mode","_t":1789750997147,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"metro:bundling:started","_t":1789751009562,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1789751009562,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751009567,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751010272,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1789751010372,"id":"1","progress":0.0856632956573468,"total":41,"current":12}
+{"_e":"metro:bundling:progress","_t":1789751010473,"id":"1","progress":0.5800184202447262,"total":151,"current":115}
+{"_e":"metro:bundling:progress","_t":1789751010573,"id":"1","progress":0.8450803354179653,"total":223,"current":205}
+{"_e":"metro:bundling:progress","_t":1789751010683,"id":"1","progress":0.9910913584183674,"total":224,"current":223}
+{"_e":"metro:bundling:progress","_t":1789751011085,"id":"1","progress":0.999,"total":224,"current":224}
+{"_e":"metro:bundling:progress","_t":1789751011191,"id":"1","progress":0.999,"total":241,"current":234}
+{"_e":"metro:bundling:progress","_t":1789751011292,"id":"1","progress":0.999,"total":248,"current":238}
+{"_e":"metro:bundling:progress","_t":1789751011393,"id":"1","progress":0.999,"total":260,"current":250}
+{"_e":"metro:bundling:progress","_t":1789751011525,"id":"1","progress":0.999,"total":262,"current":256}
+{"_e":"metro:bundling:progress","_t":1789751011981,"id":"1","progress":0.999,"total":262,"current":257}
+{"_e":"metro:bundling:progress","_t":1789751012089,"id":"1","progress":0.999,"total":283,"current":281}
+{"_e":"metro:bundling:progress","_t":1789751012193,"id":"1","progress":0.999,"total":296,"current":293}
+{"_e":"metro:bundling:progress","_t":1789751012294,"id":"1","progress":0.999,"total":300,"current":300}
+{"_e":"metro:bundling:done","_t":1789751012342,"id":"1","total":300,"ms":2779.8883}
+{"_e":"metro:client_log","_t":1789751012557,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1789751012558,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1789751012558,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1789751012642,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1789751055006,"id":"3","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1789751055006,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751055009,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751055150,"id":"3","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1789751055252,"id":"3","progress":0.09765625,"total":16,"current":5}
+{"_e":"metro:bundling:progress","_t":1789751055368,"id":"3","progress":0.31360000000000005,"total":25,"current":14}
+{"_e":"metro:bundling:progress","_t":1789751055469,"id":"3","progress":0.31360000000000005,"total":173,"current":31}
+{"_e":"metro:bundling:progress","_t":1789751055572,"id":"3","progress":0.31360000000000005,"total":182,"current":57}
+{"_e":"metro:bundling:progress","_t":1789751055679,"id":"3","progress":0.31360000000000005,"total":190,"current":65}
+{"_e":"metro:bundling:progress","_t":1789751055778,"id":"3","progress":0.31360000000000005,"total":212,"current":76}
+{"_e":"metro:bundling:progress","_t":1789751055878,"id":"3","progress":0.31360000000000005,"total":223,"current":85}
+{"_e":"metro:bundling:progress","_t":1789751055978,"id":"3","progress":0.31360000000000005,"total":228,"current":96}
+{"_e":"metro:bundling:progress","_t":1789751056078,"id":"3","progress":0.31360000000000005,"total":241,"current":102}
+{"_e":"metro:bundling:progress","_t":1789751056179,"id":"3","progress":0.31360000000000005,"total":263,"current":118}
+{"_e":"metro:bundling:progress","_t":1789751056279,"id":"3","progress":0.31360000000000005,"total":286,"current":140}
+{"_e":"metro:bundling:progress","_t":1789751056379,"id":"3","progress":0.3334131113423517,"total":310,"current":179}
+{"_e":"metro:bundling:progress","_t":1789751056481,"id":"3","progress":0.4012349395000043,"total":341,"current":216}
+{"_e":"metro:bundling:progress","_t":1789751056581,"id":"3","progress":0.44324728823533677,"total":371,"current":247}
+{"_e":"metro:bundling:progress","_t":1789751056684,"id":"3","progress":0.44324728823533677,"total":422,"current":277}
+{"_e":"metro:bundling:progress","_t":1789751056784,"id":"3","progress":0.44324728823533677,"total":460,"current":301}
+{"_e":"metro:bundling:progress","_t":1789751056884,"id":"3","progress":0.4453806094182826,"total":475,"current":317}
+{"_e":"metro:bundling:progress","_t":1789751057013,"id":"3","progress":0.45266204139326954,"total":489,"current":329}
+{"_e":"metro:bundling:progress","_t":1789751057114,"id":"3","progress":0.4776041564552494,"total":505,"current":349}
+{"_e":"metro:bundling:progress","_t":1789751057217,"id":"3","progress":0.5338058109488611,"total":516,"current":377}
+{"_e":"metro:bundling:progress","_t":1789751057317,"id":"3","progress":0.5660770975056689,"total":525,"current":395}
+{"_e":"metro:bundling:progress","_t":1789751057426,"id":"3","progress":0.6133671062974931,"total":535,"current":419}
+{"_e":"metro:bundling:progress","_t":1789751057526,"id":"3","progress":0.6133671062974931,"total":576,"current":450}
+{"_e":"metro:bundling:progress","_t":1789751057628,"id":"3","progress":0.6575635068738046,"total":587,"current":476}
+{"_e":"metro:bundling:progress","_t":1789751057729,"id":"3","progress":0.706164818868724,"total":595,"current":500}
+{"_e":"metro:bundling:progress","_t":1789751057830,"id":"3","progress":0.7294236391288444,"total":603,"current":515}
+{"_e":"metro:bundling:progress","_t":1789751057931,"id":"3","progress":0.7390950291269369,"total":613,"current":527}
+{"_e":"metro:bundling:progress","_t":1789751058032,"id":"3","progress":0.7691687351410228,"total":618,"current":542}
+{"_e":"metro:bundling:progress","_t":1789751058139,"id":"3","progress":0.7844897959183673,"total":630,"current":558}
+{"_e":"metro:bundling:progress","_t":1789751058239,"id":"3","progress":0.7987890625,"total":640,"current":572}
+{"_e":"metro:bundling:progress","_t":1789751058339,"id":"3","progress":0.8318115569272978,"total":648,"current":591}
+{"_e":"metro:bundling:progress","_t":1789751058449,"id":"3","progress":0.8507745876858279,"total":657,"current":606}
+{"_e":"metro:bundling:progress","_t":1789751058551,"id":"3","progress":0.8616501437792837,"total":669,"current":621}
+{"_e":"metro:bundling:progress","_t":1789751058655,"id":"3","progress":0.8806253816186652,"total":682,"current":640}
+{"_e":"metro:bundling:progress","_t":1789751058755,"id":"3","progress":0.9146920632774473,"total":688,"current":658}
+{"_e":"metro:bundling:progress","_t":1789751058855,"id":"3","progress":0.9459176385583311,"total":693,"current":674}
+{"_e":"metro:bundling:progress","_t":1789751058966,"id":"3","progress":0.9913731531696136,"total":694,"current":691}
+{"_e":"metro:bundling:progress","_t":1789751059078,"id":"3","progress":0.9942446162662258,"total":694,"current":692}
+{"_e":"metro:bundling:progress","_t":1789751059746,"id":"3","progress":0.9971202318763547,"total":694,"current":693}
+{"_e":"metro:bundling:progress","_t":1789751059855,"id":"3","progress":0.9971326179630265,"total":697,"current":696}
+{"_e":"metro:bundling:progress","_t":1789751059979,"id":"3","progress":0.999,"total":697,"current":697}
+{"_e":"metro:bundling:progress","_t":1789751060080,"id":"3","progress":0.999,"total":708,"current":708}
+{"_e":"metro:bundling:done","_t":1789751060483,"id":"3","total":708,"ms":5476.7564}
+{"_e":"root:init","_t":1789751815592,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789751815596,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789751815608,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1789751816305,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789751817245,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789751821388,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789751827533,"atlas":false,"workers":8,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789751832925,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1789751832925,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751832934,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751833036,"id":"1","progress":0.08163265306122448,"total":49,"current":14}
+{"_e":"metro:bundling:progress","_t":1789751833139,"id":"1","progress":0.20036281179138324,"total":105,"current":47}
+{"_e":"metro:bundling:progress","_t":1789751833241,"id":"1","progress":0.522572216577152,"total":166,"current":120}
+{"_e":"metro:bundling:progress","_t":1789751833341,"id":"1","progress":0.8040605149921454,"total":242,"current":217}
+{"_e":"metro:bundling:progress","_t":1789751833457,"id":"1","progress":0.9797644355070383,"total":295,"current":292}
+{"_e":"metro:bundling:done","_t":1789751833544,"id":"1","total":295,"ms":619.1632}
+{"_e":"metro:client_log","_t":1789751833994,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1789751833994,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1789751833995,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1789751872205,"id":"4","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1789751872206,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789751872230,"id":"4","total":1,"ms":24.2752}
+{"_e":"metro:client_log","_t":1789751872486,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1789751872486,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1789751872504,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1789751917900,"id":"7","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1789751917901,"id":"7","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751917904,"id":"7","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789751918006,"id":"7","progress":0.03844675124951941,"total":153,"current":30}
+{"_e":"metro:bundling:progress","_t":1789751918106,"id":"7","progress":0.1379591836734694,"total":210,"current":78}
+{"_e":"metro:bundling:progress","_t":1789751918209,"id":"7","progress":0.2930915576694411,"total":290,"current":157}
+{"_e":"metro:bundling:progress","_t":1789751918310,"id":"7","progress":0.3909910107552831,"total":427,"current":267}
+{"_e":"metro:bundling:progress","_t":1789751918409,"id":"7","progress":0.4954103904973894,"total":493,"current":347}
+{"_e":"metro:bundling:progress","_t":1789751918509,"id":"7","progress":0.7569628171877648,"total":554,"current":482}
+{"_e":"metro:bundling:progress","_t":1789751918609,"id":"7","progress":0.7901234567901234,"total":630,"current":560}
+{"_e":"metro:bundling:progress","_t":1789751918710,"id":"7","progress":0.9268889417985073,"total":698,"current":672}
+{"_e":"metro:bundling:progress","_t":1789751918817,"id":"7","progress":0.994358262312873,"total":708,"current":706}
+{"_e":"metro:bundling:progress","_t":1789751919283,"id":"7","progress":0.9971771361996873,"total":708,"current":707}
+{"_e":"metro:bundling:done","_t":1789751919402,"id":"7","total":708,"ms":1501.5011}
