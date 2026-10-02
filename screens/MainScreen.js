@@ -1,0 +1,49 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import HomeScreen from './HomeScreen';
+import CatalogScreen from './CatalogScreen';
+import FavoritesScreen from './FavoritesScreen';
+import ProfileScreen from './ProfileScreen';
+
+const tabs = [
+  { key: 'Inicio', icon: '🏠', component: HomeScreen },
+  { key: 'Catálogo', icon: '📋', component: CatalogScreen },
+  { key: 'Favoritos', icon: '❤️', component: FavoritesScreen },
+  { key: 'Perfil', icon: '👤', component: ProfileScreen },
+];
+
+export default function MainScreen({ navigation }) {
+  const [tab, setTab] = useState('Inicio');
+  const Active = tabs.find((t) => t.key === tab).component;
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Active navigation={navigation} setTab={setTab} />
+      </View>
+
+      <View style={styles.tabBar}>
+        {tabs.map((t) => (
+          <TouchableOpacity key={t.key} style={styles.tabItem} onPress={() => setTab(t.key)}>
+            <Text style={{ fontSize: 22 }}>{t.icon}</Text>
+            <Text style={tab === t.key ? styles.labelActive : styles.label}>{t.key}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  tabBar: {
+    flexDirection: 'row',
+    backgroundColor: '#6b1a1a',
+    paddingVertical: 8,
+    paddingBottom: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#8c1d0d',
+  },
+  tabItem: { flex: 1, alignItems: 'center' },
+  label: { color: '#d4a574', fontSize: 11 },
+  labelActive: { color: '#FBE9D0', fontSize: 11, fontWeight: 'bold' },
+});
