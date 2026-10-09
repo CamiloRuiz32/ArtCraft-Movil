@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './HomeScreen';
 import CatalogScreen from './CatalogScreen';
 import FavoritesScreen from './FavoritesScreen';
 import ProfileScreen from './ProfileScreen';
 
 const tabs = [
-  { key: 'Inicio', icon: '🏠', component: HomeScreen },
-  { key: 'Catálogo', icon: '📋', component: CatalogScreen },
-  { key: 'Favoritos', icon: '❤️', component: FavoritesScreen },
-  { key: 'Perfil', icon: '👤', component: ProfileScreen },
+  { key: 'Inicio', icon: 'home', component: HomeScreen },
+  { key: 'Catálogo', icon: 'grid', component: CatalogScreen },
+  { key: 'Favoritos', icon: 'heart', component: FavoritesScreen },
+  { key: 'Perfil', icon: 'person', component: ProfileScreen },
 ];
 
 export default function MainScreen({ navigation }) {
@@ -25,7 +26,7 @@ export default function MainScreen({ navigation }) {
       <View style={styles.tabBar}>
         {tabs.map((t) => (
           <TouchableOpacity key={t.key} style={styles.tabItem} onPress={() => setTab(t.key)}>
-            <Text style={{ fontSize: 22 }}>{t.icon}</Text>
+            <Ionicons name={t.icon} size={22} color={tab === t.key ? '#FBE9D0' : '#d4a574'} />
             <Text style={tab === t.key ? styles.labelActive : styles.label}>{t.key}</Text>
           </TouchableOpacity>
         ))}

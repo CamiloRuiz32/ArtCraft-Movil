@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar, Alert,
+  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar, Alert, Image,
 } from 'react-native';
 import { formatCOP } from '../data/mock';
 import { useApp } from '../context/AppContext';
@@ -32,7 +32,7 @@ export default function CartScreen({ navigation }) {
         renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.image}>
-              <Text style={{ fontSize: 30 }}>{item.product.emoji}</Text>
+              <Image source={item.product.image} style={{ width: 60, height: 60, borderRadius: 8 }} />
             </View>
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
               <Text style={styles.name}>{item.product.name}</Text>

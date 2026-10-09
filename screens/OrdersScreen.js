@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, FlatList, StatusBar, TouchableOpacity,
+  View, Text, StyleSheet, FlatList, StatusBar, TouchableOpacity, Image,
 } from 'react-native';
 import { formatCOP } from '../data/mock';
 import { useApp } from '../context/AppContext';
@@ -46,7 +46,7 @@ export default function OrdersScreen({ navigation }) {
             <View style={{ flexDirection: 'row', gap: 10, marginTop: 10 }}>
               {item.items.map((it) => (
                 <View key={it.product.id} style={styles.thumb}>
-                  <Text style={{ fontSize: 22 }}>{it.product.emoji}</Text>
+                  <Image source={it.product.image} style={{ width: 36, height: 36, borderRadius: 6 }} />
                 </View>
               ))}
               <Text style={styles.total}>{formatCOP(item.total)}</Text>

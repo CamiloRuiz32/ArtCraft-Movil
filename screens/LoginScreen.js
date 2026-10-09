@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   StatusBar, Alert,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
 
 export default function LoginScreen({ navigation }) {
@@ -58,7 +59,10 @@ export default function LoginScreen({ navigation }) {
           style={styles.googleButton}
           onPress={() => { login('google@user.com', 'google'); navigation.reset({ index: 0, routes: [{ name: 'Main' }] }); }}
         >
-          <Text style={styles.googleText}>🔵 Google</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <Ionicons name="logo-google" size={18} color="#4a1008" />
+            <Text style={styles.googleText}>Google</Text>
+          </View>
         </TouchableOpacity>
       </View>
 

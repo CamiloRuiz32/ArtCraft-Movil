@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, ScrollView, StatusBar, Alert,
+  View, Text, StyleSheet, TouchableOpacity, ScrollView, StatusBar, Alert, Image, FlatList, Dimensions,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { formatCOP } from '../data/mock';
 import { useApp } from '../context/AppContext';
 
@@ -12,6 +13,9 @@ export default function ProductDetailScreen({ route, navigation }) {
   const [color, setColor] = useState(0);
 
   const colors = ['#c1572b', '#a83232', '#d98e2b', '#f2f2f2'];
+  const [imgIndex, setImgIndex] = useState(0);
+  const { width } = Dimensions.get('window');
+  const gallery = product.images || [product.image];
 
   const onAdd = () => {
     for (let i = 0; i < qty; i++) addToCart(product);
@@ -27,22 +31,39 @@ export default function ProductDetailScreen({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.topTitle}>Art Craft</Text>
         <TouchableOpacity onPress={() => toggleFavorite(product.id)}>
-          <Text style={{ fontSize: 18 }}>{favorites.includes(product.id) ? '❤️' : '🤍'}</Text>
+          <Ionicons name={favorites.includes(product.id) ? 'heart' : 'heart-outline'} size={20} color="#FBE9D0" />
         </TouchableOpacity>
       </View>
 
       <ScrollView>
-        <View style={styles.imageBox}>
-          <Text style={{ fontSize: 90 }}>{product.emoji}</Text>
-        </View>
+        <FlatList
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          data={gallery}
+          keyExtractor={(_, i) => String(i)}
+          onMomentumScrollEnd={(e) => setImgIndex(Math.round(e.nativeEvent.contentOffset.x / (width - 32)))}
+          renderItem={({ item }) => (
+            <View style={{ width: width - 32, alignItems: 'center' }}>
+              <Image source={item} style={{ width: 260, height: 260, borderRadius: 12 }} resizeMode="contain" />
+            </View>
+          )}
+        />
         <View style={styles.dots}>
-          <Text style={styles.dot}>● ○ ○</Text>
+          <Text style={styles.dot}>
+            {gallery.map((_, i) => (i === imgIndex ? '● ' : '○ ')).join('')}
+          </Text>
         </View>
 
         <View style={styles.body}>
           <Text style={styles.name}>{product.name}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Text style={styles.rating}>{'★'.repeat(product.rating)}{'☆'.repeat(5 - product.rating)} 5.0</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Ionicons key={s} name={s <= product.rating ? 'star' : 'star-outline'} size={14} color="#d4580b" />
+              ))}
+              <Text style={{ color: '#d4580b', marginLeft: 4 }}>{product.rating}.0</Text>
+            </View>
             <Text style={styles.price}>{formatCOP(product.price)}</Text>
           </View>
           <Text style={styles.desc}>{product.description}</Text>
@@ -82,8 +103,8 @@ const styles = StyleSheet.create({
   topBar: { backgroundColor: '#6b1a1a', paddingTop: 40, paddingBottom: 10, paddingHorizontal: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   topTitle: { color: '#FBE9D0', fontWeight: 'bold', fontSize: 16 },
   imageBox: { backgroundColor: '#8c1d0d', margin: 16, borderRadius: 16, height: 260, alignItems: 'center', justifyContent: 'center' },
-  dots: { alignItems: 'center', marginBottom: 8 },
-  dot: { color: '#8c1d0d', letterSpacing: 2 },
+  dots: { alignItems: 'center', marginVertical: 8 },
+  dot: { color: '#8c1d0d', letterSpacing: 2, fontSize: 12 },
   body: { backgroundColor: '#F5D7B8', margin: 16, borderRadius: 16, padding: 16 },
   name: { fontSize: 20, fontWeight: 'bold', color: '#4a1008' },
   rating: { color: '#d4580b', marginTop: 4 },

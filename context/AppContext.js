@@ -7,6 +7,20 @@ export const AppProvider = ({ children }) => {
   const [cart, setCart] = useState([]); // {product, qty}
   const [favorites, setFavorites] = useState([]); // product ids
   const [orders, setOrders] = useState([]);
+  const [addresses, setAddresses] = useState(['Calle 123 #123-45, Popayán']);
+  const [cards, setCards] = useState(['Visa terminada en 1234']);
+  const [notifications, setNotifications] = useState({ pedidos: true, promos: true, noticias: false });
+
+  const updateProfile = (name, email) => {
+    if (!name || !email) return { ok: false, error: 'Nombre y correo son obligatorios' };
+    setUser((u) => ({ ...(u || {}), name, email }));
+    return { ok: true };
+  };
+
+  const addAddress = (text) => text && setAddresses((prev) => [...prev, text]);
+  const addCard = (text) => text && setCards((prev) => [...prev, text]);
+  const toggleNotification = (key) =>
+    setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
 
   // Simulación de autenticación
   const login = (email, password) => {
@@ -73,10 +87,12 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        user, login, register, logout,
+        user, login, register, logout, updateProfile,
         cart, addToCart, changeQty, cartTotal,
         favorites, toggleFavorite,
         orders, checkout,
+        addresses, addAddress, cards, addCard,
+        notifications, toggleNotification,
       }}
     >
       {children}

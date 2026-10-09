@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
 
 const CustomSplash = ({ onFinish }) => {
   const fadeAnim = useRef(new Animated.Value(1)).current;
-  const logoScale = useRef(new Animated.Value(0.5)).current;
-  const textOpacity = useRef(new Animated.Value(0)).current;
+  const logoScale = useRef(new Animated.Value(0.7)).current;
+  const logoOpacity = useRef(new Animated.Value(0)).current;
+  const titleOpacity = useRef(new Animated.Value(0)).current;
   const subtitleOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -18,12 +20,17 @@ const CustomSplash = ({ onFinish }) => {
           friction: 7,
           useNativeDriver: true,
         }),
-        Animated.timing(textOpacity, {
+        Animated.timing(logoOpacity, {
           toValue: 1,
           duration: 800,
           useNativeDriver: true,
         }),
       ]),
+      Animated.timing(titleOpacity, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true,
+      }),
       Animated.timing(subtitleOpacity, {
         toValue: 1,
         duration: 600,
@@ -34,7 +41,7 @@ const CustomSplash = ({ onFinish }) => {
     const timer = setTimeout(() => {
       Animated.timing(fadeAnim, {
         toValue: 0,
-        duration: 800,
+        duration: 700,
         useNativeDriver: true,
       }).start(() => {
         if (onFinish) onFinish();
@@ -46,22 +53,20 @@ const CustomSplash = ({ onFinish }) => {
 
   return (
     <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      <View style={styles.topSection} />
-      <View style={styles.bottomSection} />
+      <LinearGradient
+        colors={['#4a0808', '#6b0f0f', '#8c1d0d']}
+        style={StyleSheet.absoluteFill}
+      />
 
       <View style={styles.content}>
         <Animated.Image
           source={require('../assets/images/Logo.png')}
-          style={[styles.logo, { transform: [{ scale: logoScale }] }]}
+          style={[styles.logo, { opacity: logoOpacity, transform: [{ scale: logoScale }] }]}
           resizeMode="contain"
         />
 
-        <Animated.Text style={[styles.title, { opacity: textOpacity }]}>
-          ART CRAFT
-        </Animated.Text>
-
         <Animated.Text style={[styles.subtitle, { opacity: subtitleOpacity }]}>
-          Piezas que cuentan, creando que inspira
+          manos que crean, corazón que inspira
         </Animated.Text>
       </View>
     </Animated.View>
@@ -72,36 +77,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  topSection: {
-    flex: 1,
-    backgroundColor: '#1a0505',
-  },
-  bottomSection: {
-    flex: 1,
-    backgroundColor: '#5c1010',
-  },
   content: {
-    ...StyleSheet.absoluteFillObject,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 24,
   },
   logo: {
     width: 180,
     height: 180,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   title: {
     color: '#FBE9D0',
-    fontSize: 32,
+    fontSize: 34,
     fontWeight: 'bold',
     letterSpacing: 6,
-    marginBottom: 10,
+    marginBottom: 8,
   },
   subtitle: {
     color: '#d4a574',
     fontSize: 14,
     fontStyle: 'italic',
-    letterSpacing: 1,
+    textAlign: 'center',
   },
 });
 

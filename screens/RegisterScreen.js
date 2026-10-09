@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
   StatusBar, Alert, ScrollView,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
 
 export default function RegisterScreen({ navigation }) {
@@ -44,7 +45,10 @@ export default function RegisterScreen({ navigation }) {
 
         <Text style={styles.or}>— O continúa con —</Text>
         <TouchableOpacity style={styles.googleButton} onPress={onRegister}>
-          <Text style={styles.googleText}>🔵 Google</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <Ionicons name="logo-google" size={18} color="#4a1008" />
+            <Text style={styles.googleText}>Google</Text>
+          </View>
         </TouchableOpacity>
       </View>
 

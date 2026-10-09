@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar,
+  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar, Image,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { products, formatCOP } from '../data/mock';
 import { useApp } from '../context/AppContext';
 
@@ -13,7 +14,7 @@ export default function FavoritesScreen({ navigation }) {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#6b1a1a" />
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>❤️ Mis favoritos</Text>
+        <Text style={styles.headerTitle}>Mis favoritos</Text>
       </View>
 
       <FlatList
@@ -28,14 +29,14 @@ export default function FavoritesScreen({ navigation }) {
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Producto', { product: item })}>
             <View style={styles.image}>
-              <Text style={{ fontSize: 36 }}>{item.emoji}</Text>
+              <Image source={item.image} style={{ width: 70, height: 70, borderRadius: 8 }} />
             </View>
             <View style={{ flex: 1, paddingHorizontal: 12 }}>
               <Text style={styles.name}>{item.name} Wayuu</Text>
               <Text style={styles.price}>{formatCOP(item.price)}</Text>
             </View>
             <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
-              <Text style={{ fontSize: 20 }}>❤️</Text>
+              <Ionicons name="heart" size={20} color="#8c1d0d" />
             </TouchableOpacity>
           </TouchableOpacity>
         )}

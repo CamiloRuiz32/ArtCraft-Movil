@@ -1,8 +1,9 @@
 import React from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView,
-  StatusBar, TextInput, FlatList,
+  StatusBar, TextInput, FlatList, Image,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { categories, products, formatCOP } from '../data/mock';
 
 export default function HomeScreen({ navigation, setTab }) {
@@ -14,11 +15,14 @@ export default function HomeScreen({ navigation, setTab }) {
 
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Text style={styles.headerLogoText}>🏺</Text>
+          <Image
+            source={require('../assets/images/Logo.png')}
+            style={{ width: 32, height: 32, borderRadius: 16, backgroundColor: '#fff' }}
+          />
           <Text style={styles.headerTitle}>Art Craft</Text>
         </View>
         <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.navigate('Carrito')}>
-          <Text style={styles.headerIconText}>🛒</Text>
+          <Ionicons name="cart-outline" size={18} color="#FBE9D0" />
         </TouchableOpacity>
       </View>
 
@@ -26,7 +30,7 @@ export default function HomeScreen({ navigation, setTab }) {
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="Buscar artesanías..." placeholderTextColor="#999" />
           <TouchableOpacity style={styles.searchButton} onPress={() => setTab('Catálogo')}>
-            <Text style={styles.searchButtonText}>🔍</Text>
+            <Ionicons name="search" size={18} color="#FBE9D0" />
           </TouchableOpacity>
         </View>
 
@@ -37,7 +41,11 @@ export default function HomeScreen({ navigation, setTab }) {
               <Text style={styles.heroButtonText}>Ver opciones</Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.heroEmoji}>🏺🪘</Text>
+          <Image
+            source={require('../assets/images/MochilasInicio.png')}
+            style={{ width: 120, height: 120 }}
+            resizeMode="contain"
+          />
         </View>
 
         <View style={styles.section}>
@@ -56,7 +64,7 @@ export default function HomeScreen({ navigation, setTab }) {
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.categoryCard} onPress={() => setTab('Catálogo')}>
                 <View style={styles.categoryImage}>
-                  <Text style={{ fontSize: 32 }}>{item.emoji}</Text>
+                  <Image source={item.image} style={{ width: 50, height: 50, resizeMode: 'cover', borderRadius: 8 }} />
                 </View>
                 <Text style={styles.categoryName}>{item.name}</Text>
               </TouchableOpacity>
@@ -75,7 +83,7 @@ export default function HomeScreen({ navigation, setTab }) {
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.productCard} onPress={() => navigation.navigate('Producto', { product: item })}>
                 <View style={styles.productImage}>
-                  <Text style={{ fontSize: 40 }}>{item.emoji}</Text>
+                  <Image source={item.image} style={{ width: 120, height: 100, borderRadius: 10 }} />
                 </View>
                 <Text style={styles.productName}>{item.name}</Text>
                 <Text style={styles.productPrice}>{formatCOP(item.price)}</Text>
@@ -110,10 +118,10 @@ const styles = StyleSheet.create({
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
   sectionTitle: { color: '#4a1008', fontSize: 22, fontWeight: 'bold', marginBottom: 12 },
   sectionLink: { color: '#8c1d0d', fontSize: 13, fontWeight: 'bold' },
-  categoryCard: { width: 110, backgroundColor: '#8c1d0d', borderRadius: 12, padding: 12, alignItems: 'center' },
+  categoryCard: { width: 110, backgroundColor: '#8c1d0d', borderRadius: 12, padding: 12, alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4, elevation: 4 },
   categoryImage: { width: 70, height: 70, backgroundColor: '#d4580b', borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
   categoryName: { color: '#FBE9D0', fontSize: 13, fontWeight: 'bold' },
-  productCard: { width: 150, backgroundColor: '#8c1d0d', borderRadius: 12, padding: 12 },
+  productCard: { width: 150, backgroundColor: '#8c1d0d', borderRadius: 12, padding: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 4, elevation: 4 },
   productImage: { width: '100%', height: 100, backgroundColor: '#d4580b', borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
   productName: { color: '#FBE9D0', fontSize: 14, fontWeight: 'bold' },
   productPrice: { color: '#ffc26a', fontSize: 16, fontWeight: 'bold', marginTop: 4 },

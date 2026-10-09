@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, StatusBar, Alert,
+  View, Text, StyleSheet, TouchableOpacity, StatusBar,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
 
 const items = [
-  { label: 'Mis datos', icon: '👤' },
-  { label: 'Direcciones', icon: '📍' },
-  { label: 'Métodos de pago', icon: '💳' },
-  { label: 'Notificaciones', icon: '🔔' },
-  { label: 'Ayuda', icon: '❓' },
+  { label: 'Mis datos', icon: 'person-outline', section: 'data' },
+  { label: 'Direcciones', icon: 'location-outline', section: 'direcciones' },
+  { label: 'Métodos de pago', icon: 'card-outline', section: 'pagos' },
+  { label: 'Notificaciones', icon: 'notifications-outline', section: 'notificaciones' },
+  { label: 'Ayuda', icon: 'help-circle-outline', section: 'ayuda' },
 ];
 
 export default function ProfileScreen({ navigation }) {
@@ -24,25 +25,38 @@ export default function ProfileScreen({ navigation }) {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#6b1a1a" />
       <View style={styles.header}>
-        <Text style={styles.avatar}>👩</Text>
+        <Ionicons name="person-circle" size={90} color="#FBE9D0" />
         <Text style={styles.name}>{user ? user.name : 'Invitado'}</Text>
         <Text style={styles.email}>{user ? user.email : 'sin sesión'}</Text>
-        <Text style={styles.edit}>Editar perfil</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('OpcionesPerfil', { section: 'data' })}>
+          <Text style={styles.edit}>Editar perfil</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={{ padding: 16, gap: 10 }}>
         <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Pedidos')}>
-          <Text style={styles.rowText}>📦 Mis pedidos</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="bag-handle-outline" size={20} color="#4a1008" />
+            <Text style={[styles.rowText, { marginLeft: 8 }]}>Mis pedidos</Text>
+          </View>
           <Text>›</Text>
         </TouchableOpacity>
+
         {items.map((it) => (
-          <TouchableOpacity key={it.label} style={styles.row} onPress={() => Alert.alert(it.label, 'Pantalla de ejemplo (simulada)')}>
-            <Text style={styles.rowText}>{it.icon} {it.label}</Text>
+          <TouchableOpacity key={it.label} style={styles.row} onPress={() => navigation.navigate('OpcionesPerfil', { section: it.section })}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name={it.icon} size={20} color="#4a1008" />
+              <Text style={[styles.rowText, { marginLeft: 8 }]}>{it.label}</Text>
+            </View>
             <Text>›</Text>
           </TouchableOpacity>
         ))}
+
         <TouchableOpacity style={styles.row} onPress={onLogout}>
-          <Text style={[styles.rowText, { color: '#8c1d0d' }]}>⏻ Cerrar sesión</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="log-out-outline" size={20} color="#8c1d0d" />
+            <Text style={[styles.rowText, { color: '#8c1d0d', marginLeft: 8 }]}>Cerrar sesión</Text>
+          </View>
           <Text>›</Text>
         </TouchableOpacity>
       </View>
@@ -53,7 +67,6 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FBE9D0' },
   header: { backgroundColor: '#6b1a1a', paddingTop: 50, paddingBottom: 20, alignItems: 'center' },
-  avatar: { fontSize: 70, backgroundColor: '#d4580b', borderRadius: 45, padding: 6 },
   name: { color: '#FBE9D0', fontSize: 20, fontWeight: 'bold', marginTop: 8 },
   email: { color: '#d4a574', fontSize: 13 },
   edit: { color: '#FBE9D0', fontStyle: 'italic', marginTop: 4 },

@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar,
+  View, Text, StyleSheet, TouchableOpacity, FlatList, StatusBar, Image,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { products, formatCOP } from '../data/mock';
 import { useApp } from '../context/AppContext';
 
@@ -14,7 +15,7 @@ export default function CatalogScreen({ navigation }) {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Catálogo</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Carrito')}>
-          <Text style={{ fontSize: 20 }}>🛒</Text>
+          <Ionicons name="cart-outline" size={20} color="#FBE9D0" />
         </TouchableOpacity>
       </View>
 
@@ -30,12 +31,12 @@ export default function CatalogScreen({ navigation }) {
             onPress={() => navigation.navigate('Producto', { product: item })}
           >
             <View style={styles.image}>
-              <Text style={{ fontSize: 44 }}>{item.emoji}</Text>
+              <Image source={item.image} style={{ width: '100%', height: 90, borderRadius: 10 }} />
             </View>
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.price}>{formatCOP(item.price)}</Text>
             <TouchableOpacity onPress={() => toggleFavorite(item.id)} style={{ alignSelf: 'flex-end' }}>
-              <Text style={{ fontSize: 18 }}>{favorites.includes(item.id) ? '❤️' : '🤍'}</Text>
+              <Ionicons name={favorites.includes(item.id) ? 'heart' : 'heart-outline'} size={18} color="#8c1d0d" />
             </TouchableOpacity>
           </TouchableOpacity>
         )}
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#FBE9D0' },
   header: { backgroundColor: '#6b1a1a', paddingTop: 40, paddingBottom: 14, paddingHorizontal: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   headerTitle: { color: '#FBE9D0', fontSize: 20, fontWeight: 'bold' },
-  card: { flex: 1, backgroundColor: '#E8853D', borderRadius: 12, padding: 10 },
+  card: { flex: 1, backgroundColor: '#E8853D', borderRadius: 12, padding: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 3 },
   image: { height: 90, backgroundColor: '#d4580b', borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
   name: { color: '#4a1008', fontWeight: 'bold', fontSize: 14 },
   price: { color: '#8c1d0d', fontWeight: 'bold', marginTop: 2 },
