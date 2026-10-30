@@ -1,25 +1,108 @@
 import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  StatusBar, Alert,
+  StatusBar, ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
 import { useApp } from '../context/AppContext';
+import ConfirmDialog from '../components/ConfirmDialog';
+import { GOOGLE_WEB_CLIENT_ID, isGoogleConfigured } from '../config/googleAuth';
+
+// Necesario para que el popup de Google cierre la sesión correctamente en web.
+WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginScreen({ navigation }) {
-  const { login } = useApp();
+  const { login, loginWithGoogle } = useApp();
   const [email, setEmail] = useState('muselen10@gmail.com');
   const [password, setPassword] = useState('********');
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [dialog, setDialog] = useState(null);
+
+  const [, , promptAsync] = Google.useAuthRequest({
+    clientId: GOOGLE_WEB_CLIENT_ID,
+    webClientId: GOOGLE_WEB_CLIENT_ID,
+    scopes: ['profile', 'email'],
+  });
+
+  const goToApp = (role) =>
+    navigation.reset({
+      index: 0,
+      routes: [{ name: role === 'admin' ? 'Admin' : 'Main' }],
+    });
 
   const onLogin = () => {
     const res = login(email, password);
     if (res.ok) {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: res.role === 'admin' ? 'Admin' : 'Main' }],
-      });
+      goToApp(res.role);
     } else {
-      Alert.alert('Error', res.error);
+      setDialog({ title: 'No pudimos iniciar sesión', message: res.error });
+    }
+  };
+
+  const showGoogleHelp = () =>
+    setDialog({
+      title: 'Falta configurar Google',
+      message:
+        'Para entrar con Google necesitas un Client ID:\n\n' +
+        '1. Entra a console.cloud.google.com/apis/credentials\n' +
+        '2. Crea un "ID de cliente de OAuth" tipo "Aplicación web".\n' +
+        '3. En "Orígenes de JavaScript autorizados" y en "URI de redireccionamiento autorizados" agrega:\n' +
+        'http://localhost:8081\n' +
+        '4. Copia el Client ID y pégalo en config/googleAuth.js (o en un archivo .env como EXPO_PUBLIC_GOOGLE_CLIENT_ID).\n' +
+        '5. Reinicia Expo con: npx expo start --web',
+    });
+
+  const onGoogleLogin = async () => {
+    if (!isGoogleConfigured) {
+      showGoogleHelp();
+      return;
+    }
+
+    setGoogleLoading(true);
+    try {
+      const result = await promptAsync();
+
+      if (result?.type === 'success') {
+        const accessToken = result.authentication?.accessToken;
+        if (!accessToken) throw new Error('Sin token de acceso');
+
+        const info = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }).then((r) => r.json());
+
+        if (!info?.email) throw new Error('Sin correo en la cuenta de Google');
+
+        const res = loginWithGoogle({
+          name: info.name,
+          email: info.email,
+          picture: info.picture,
+        });
+
+        if (!res.ok) {
+          setDialog({ title: 'Cuenta no disponible', message: res.error });
+          return;
+        }
+        goToApp(res.role);
+      } else if (result?.type === 'error') {
+        setDialog({
+          title: 'No se pudo iniciar sesión con Google',
+          message:
+            'Revisa que el Client ID y la URL de redirección estén bien configurados en Google Cloud.\n\n' +
+            'Detalle: ' + (result.error?.message || 'error de autorización'),
+        });
+      }
+      // type "dismiss" / "cancel": el usuario cerró el popup, no hacemos nada.
+    } catch (error) {
+      setDialog({
+        title: 'No se pudo iniciar sesión con Google',
+        message:
+          'Ocurrió un error al conectar con Google. Verifica que las ventanas emergentes estén permitidas e intenta de nuevo.\n\n' +
+          'Detalle: ' + (error?.message || String(error)),
+      });
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -49,7 +132,14 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry
         />
 
-        <TouchableOpacity onPress={() => Alert.alert('Recuperar', 'Se envió un correo de recuperación (simulado).')}>
+        <TouchableOpacity
+          onPress={() =>
+            setDialog({
+              title: 'Recuperar contraseña',
+              message: 'Se envió un correo de recuperación (simulado).',
+            })
+          }
+        >
           <Text style={styles.link}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
 
@@ -59,22 +149,35 @@ export default function LoginScreen({ navigation }) {
 
         <Text style={styles.or}>— O continúa con —</Text>
         <TouchableOpacity
-          style={styles.googleButton}
-          onPress={() => {
-            const res = login('google@user.com', 'google');
-            navigation.reset({ index: 0, routes: [{ name: res.role === 'admin' ? 'Admin' : 'Main' }] });
-          }}
+          style={[styles.googleButton, googleLoading && styles.googleButtonDisabled]}
+          onPress={onGoogleLogin}
+          disabled={googleLoading}
         >
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-            <Ionicons name="logo-google" size={18} color="#4a1008" />
-            <Text style={styles.googleText}>Google</Text>
-          </View>
+          {googleLoading ? (
+            <ActivityIndicator color="#4a1008" />
+          ) : (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Ionicons name="logo-google" size={18} color="#4a1008" />
+              <Text style={styles.googleText}>Continuar con Google</Text>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity onPress={() => navigation.navigate('Registro')}>
         <Text style={styles.registerText}>¿No tienes cuenta? Regístrate aquí</Text>
       </TouchableOpacity>
+
+      <ConfirmDialog
+        visible={!!dialog}
+        title={dialog?.title || ''}
+        message={dialog?.message}
+        confirmText="Entendido"
+        destructive={false}
+        showCancel={false}
+        onConfirm={() => setDialog(null)}
+        onCancel={() => setDialog(null)}
+      />
     </View>
   );
 }
@@ -91,6 +194,7 @@ const styles = StyleSheet.create({
   buttonText: { color: '#8c1d0d', fontWeight: 'bold' },
   or: { textAlign: 'center', color: '#4a1008', marginVertical: 12, fontSize: 12 },
   googleButton: { backgroundColor: '#FBE9D0', borderRadius: 20, padding: 10, alignItems: 'center' },
+  googleButtonDisabled: { opacity: 0.7 },
   googleText: { color: '#4a1008', fontWeight: 'bold' },
   registerText: { textAlign: 'center', marginTop: 20, color: '#8c1d0d', fontWeight: 'bold' },
 });

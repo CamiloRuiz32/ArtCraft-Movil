@@ -66,6 +66,27 @@ export const AppProvider = ({ children }) => {
     return { ok: true, role };
   };
 
+  // Inicio de sesión con Google: usa la cuenta real y la registra si es nueva
+  const loginWithGoogle = ({ name, email, picture }) => {
+    if (!email) return { ok: false, error: 'No se pudo obtener el correo de Google' };
+    const key = email.trim().toLowerCase();
+    const known = users.find((u) => u.email.toLowerCase() === key);
+    if (known && !known.active) return { ok: false, error: 'Esta cuenta está desactivada' };
+
+    const profile = {
+      name: known ? known.name : name || email.split('@')[0],
+      email: known ? known.email : email.trim(),
+      picture,
+      role: known ? known.role : key.startsWith('admin') ? 'admin' : 'cliente',
+    };
+
+    if (!known) {
+      setUsers((prev) => [...prev, { id: 'u' + Date.now(), name: profile.name, email: profile.email, role: profile.role, active: true }]);
+    }
+    setUser(profile);
+    return { ok: true, role: profile.role };
+  };
+
   const register = (name, email, password, confirm) => {
     if (!name || !email || !password) return { ok: false, error: 'Completa todos los campos' };
     if (password !== confirm) return { ok: false, error: 'Las contraseñas no coinciden' };
@@ -176,7 +197,7 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        user, login, register, logout, updateProfile,
+        user, login, loginWithGoogle, register, logout, updateProfile,
         users, toggleUserActive,
         products, addProduct, updateProduct, deleteProduct,
         categories, addCategory, updateCategory, deleteCategory,
